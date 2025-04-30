@@ -1,12 +1,12 @@
-import React from 'react'
+import Landing from './pages/Landing';
 
 const App =() => {
 
   return (
     <>
-     <div className='bg-black'>
-      <h1 className='text-7xl text-white'>welcome to bin buddy ai</h1>
-     </div>
+     <main>
+      <Landing/>
+     </main>
     </>
   )
 }
