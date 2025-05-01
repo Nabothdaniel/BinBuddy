@@ -97,7 +97,7 @@ const Header = () => {
 
         {/* Desktop Menu */}
         <div className="hidden w-full md:block md:w-auto " id="navbar-multi-level">
-          <ul className="flex flex-col   mt-4 bg-white/10  text-black rounded-sm py-2 px-4 shadow-md md:flex-row md:gap-10 md:mt-0 backdrop-blur-md">
+          <ul className="flex flex-col   mt-4 bg-white/10  text-black rounded-sm py-[0.3rem] px-2 shadow-sm md:flex-row md:gap-10 md:mt-0 backdrop-blur-md">
             <li>
               <a
                 href="#"
@@ -109,7 +109,7 @@ const Header = () => {
             </li>
             <li className="relative">
               <button
-                className="flex items-center justify-between w-full  py-[5px] px-3 text-white hover:bg-white/20 hover:text-black"
+                className="flex items-center justify-between w-full rounded-sm duration-300 cursor-pointer  py-[5px] px-3 text-white hover:bg-white/20 hover:text-black"
                 onClick={toggleDropdown}
               >
                 Dropdown <FiChevronDown className={`ml-2 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />

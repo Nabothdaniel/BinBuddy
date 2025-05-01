@@ -1,14 +1,109 @@
-import React from 'react'
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
+import {Link} from 'react-router-dom';
+
+//images
+
+import waste1 from '../../assets/landing/waste-1.jpg';
+import waste2 from '../../assets/landing/waste-2.jpg';
+import waste3 from '../../assets/landing/waste-3.jpg';
+
+const slides = [
+  {
+    id: 1,
+    title: 'Detect Waste Instantly',
+    text: 'Use our AI-powered API to identify recyclable, compostable, or landfill items in real time.',
+    image: waste1,
+  },
+  {
+    id: 2,
+    title: 'Improve Sustainability',
+    text: 'Help users make better disposal decisions through real-time waste classification.',
+    image: waste2
+  },
+  {
+    id: 3,
+    title: 'Seamless API Integration',
+    text: 'Easily embed our AI capabilities into your web or mobile apps.',
+    image: waste3,
+  },
+];
 
 const Hero = () => {
-  return (
-    <div className='flex flex-col justify-center items-center text-center py-10'>
-      <h1>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium repellendus reiciendis magnam sapiente quod velit, earum quos odio. Eligendi, animi?
-      </h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eius consequuntur in expedita, consequatur sunt distinctio ipsum culpa magni deleniti eveniet eligendi, libero quasi perspiciatis officia impedit quaerat repudiandae harum?</p>
-    </div>
-  )
-}
+  const [current, setCurrent] = useState(0);
+  const intervalRef = useRef(null);
 
-export default Hero
+  const resetTimer = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 5000); // Change slide every 5 seconds
+  };
+
+  useEffect(() => {
+    resetTimer();
+    return () => clearInterval(intervalRef.current); // Cleanup on unmount
+  }, []);
+
+  const handleNext = () => {
+    setCurrent((prev) => (prev + 1) % slides.length);
+    resetTimer();
+  };
+
+  const handlePrev = () => {
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+    resetTimer();
+  };
+
+  return (
+    <div className=" w-full my-10 overflow-hidden">
+      <div className="" />
+
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between px-6 py-12 lg:px-20 gap-10">
+        <motion.div
+          key={slides[current].id}
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center lg:text-left max-w-xl"
+        >
+          <h1 className="text-4xl md:text-[4rem] font-bold text-white mb-4">{slides[current].title}</h1>
+          <p className="text-lg text-white mb-6">{slides[current].text}</p>
+          <Link to='/signup' className='inline-flex items-center '>
+          <button className="bg-green-600 hover:bg-green-800 transition cursor-pointer text-white px-5 py-3 rounded-sm ">
+            Get Started
+          </button>
+          <button className="bg-green-600 hover:bg-green-800 transition cursor-pointer text-white px-5 py-4 rounded-lg">
+            <FaChevronRight/>
+          </button>
+          </Link>
+
+          <div className="mt-6 flex justify-center lg:justify-start gap-4">
+            {/* You requested to keep these exactly as-is */}
+            <FaChevronLeft
+              onClick={handlePrev}
+              className="w-10 h-10 px-4 py-2 bg-white/40 backdrop-blur-md rounded-full hover:bg-white/60 transition cursor-pointer"
+            />
+            <FaChevronRight
+              onClick={handleNext}
+              className="w-10 h-10 px-4 py-2 bg-white/40 backdrop-blur-md rounded-full hover:bg-white/60 transition cursor-pointer"
+            />
+          </div>
+        </motion.div>
+
+        <motion.img
+          key={slides[current].image}
+          src={slides[current].image}
+          alt={slides[current].title}
+          className="w-full h-[300px] max-w-md rounded-xl shadow-xl"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Hero;

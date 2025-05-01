@@ -8,12 +8,27 @@ import App from './App.jsx'
 
 //import pages
 
-//import Signup from './pages/Signup.jsx';
+import Signup from './pages/Signup.jsx';
+import Login from './pages/Login.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+
 
 const router = createBrowserRouter([
   {
     path:'/',
     element:<App/>
+  },
+  {
+    path:'/signup',
+    element:<Signup/>
+  },
+  {
+    path:'/login',
+    element:<Login/>
+  },
+  {
+    path:'/dashboard',
+    element:<Dashboard/>
   },
 
   
