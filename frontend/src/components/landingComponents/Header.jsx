@@ -6,9 +6,16 @@ import Logo from '../../assets/logo.png'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
   };
 
   return (
@@ -32,12 +39,11 @@ const Header = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed top-0 right-0 z-40 w-64 h-full bg-white dark:bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out ${
-            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          } md:hidden`}
+          className={`fixed top-0 right-0 z-40 w-64 h-full  bg-white/80 rounded-l-md   text-black backdrop-blur-md transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+            } md:hidden`}
         >
           <div className="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
-            <span className="text-xl font-semibold text-gray-900 dark:text-white">Menu</span>
+            <span className="text-xl font-semibold text-gray-900 dark:text-black">Menu</span>
             <button
               type="button"
               onClick={toggleMenu}
@@ -48,20 +54,28 @@ const Header = () => {
           </div>
           <ul className="flex flex-col p-4 space-y-2">
             <li>
-              <a href="#" className="block px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+              <a href="#" className="block px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-500">
                 Home
               </a>
             </li>
             <li>
-              <button className="flex justify-between items-center w-full px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                Dropdown <FiChevronDown />
+              <button
+                className="flex justify-between items-center w-full px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={toggleDropdown}
+              >
+                Dropdown <FiChevronDown className={`transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-              {/* Nested dropdown logic can be added here */}
-              <ul>
-                <li>
-                  <a href="#">nested 1</a>
-                </li>
-              </ul>
+              {/* Nested dropdown logic */}
+              {isDropdownOpen && (
+                <ul className="pl-6 mt-2 space-y-1">
+                  <li>
+                    <a href="#" className="block px-2 py-1 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded">
+                      Nested 1
+                    </a>
+                  </li>
+                  {/* Add more nested items here */}
+                </ul>
+              )}
             </li>
             <li>
               <a href="#" className="block px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -82,29 +96,43 @@ const Header = () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden w-full md:block md:w-auto" id="navbar-multi-level">
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <div className="hidden w-full md:block md:w-auto " id="navbar-multi-level">
+          <ul className="flex flex-col   mt-4 bg-white/10  text-black rounded-sm py-2 px-4 shadow-md md:flex-row md:gap-10 md:mt-0 backdrop-blur-md">
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                className="block py-[5px] px-3 text-white hover:bg-white/20 hover:text-black rounded-sm md:bg-transparent md:text-white "
                 aria-current="page"
               >
                 Home
               </a>
             </li>
-            <li>
+            <li className="relative">
               <button
-                className="flex items-center justify-between w-full py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500"
+                className="flex items-center justify-between w-full  py-[5px] px-3 text-white hover:bg-white/20 hover:text-black"
+                onClick={toggleDropdown}
               >
-                Dropdown <FiChevronDown className="ml-2" />
+                Dropdown <FiChevronDown className={`ml-2 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-              {/* Add dropdown content here */}
+              {/* Dropdown content */}
+              {isDropdownOpen && (
+                <ul className="absolute left-0 mt-2 w-40 bg-white dark:bg-gray-800 shadow-lg rounded z-50">
+                  <li>
+                    <a
+                      href="#"
+                      className="block  w-full  py-[5px] px-3 text-white hover:bg-white/20 hover:text-black"
+                    >
+                      Nested 1
+                    </a>
+                  </li>
+                  {/* Add more dropdown items here */}
+                </ul>
+              )}
             </li>
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500"
+                className="flex items-center justify-between w-full rounded-md  py-[5px] px-3 text-white hover:bg-white/20 hover:text-black"
               >
                 Services
               </a>
@@ -112,7 +140,7 @@ const Header = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500"
+                className="flex items-center justify-between w-full rounded-md  py-[5px] px-3 text-white hover:bg-white/20 hover:text-black"
               >
                 Pricing
               </a>
@@ -120,7 +148,7 @@ const Header = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500"
+                className="flex items-center justify-between w-full rounded-md  py-[5px] px-3 text-white hover:bg-white/20 hover:text-black"
               >
                 Contact
               </a>
