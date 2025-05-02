@@ -1,69 +1,98 @@
 import { useState, useEffect } from 'react';
-import { auth } from '../firbase/firebase';  // Import your Firebase auth
+import { auth } from '../firbase/firebase';
 import { signOut } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaRecycle, FaUser, FaCog, FaSignOutAlt, FaTrash } from 'react-icons/fa';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(setUser);  // Listen to auth state changes
-    return () => unsubscribe();  // Cleanup when component unmounts
+    const unsubscribe = auth.onAuthStateChanged(setUser);
+    return () => unsubscribe();
   }, []);
 
   const handleLogout = async () => {
     try {
-      await signOut(auth); // Sign out the user
-      navigate('/login'); // Redirect to login page
+      await signOut(auth);
+      navigate('/login');
     } catch (err) {
       console.error('Error logging out: ', err.message);
     }
   };
 
   return (
-    <div className="flex">
+    <div className="min-h-screen flex flex-col md:flex-row">
       {/* Sidebar */}
-      <div className="w-1/4 bg-gray-800 text-white p-5 h-screen">
-        <Link to='/' className="text-2xl font-bold mb-5">Dashboard</Link>
-        <ul>
-          <li className="mb-4">
-            <a href="/" className="text-lg">Home</a>
-          </li>
-          <li className="mb-4">
-            <a href="/profile" className="text-lg">Profile</a>
-          </li>
-          <li className="mb-4">
-            <a href="/settings" className="text-lg">Settings</a>
-          </li>
-        </ul>
-      </div>
+      <aside className="bg-green-700 text-white w-full md:w-1/4 p-5 flex flex-col space-y-6 md:min-h-screen">
+        <Link to="/" className="text-2xl font-bold">BinBuddy</Link>
+        <nav className="flex flex-col gap-4">
+          <Link to="/" className="flex items-center gap-2 hover:text-green-200">
+            <FaRecycle /> Home
+          </Link>
+          <Link to="/profile" className="flex items-center gap-2 hover:text-green-200">
+            <FaUser /> Profile
+          </Link>
+          <Link to="/settings" className="flex items-center gap-2 hover:text-green-200">
+            <FaCog /> Settings
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 text-left hover:text-red-300"
+          >
+            <FaSignOutAlt /> Logout
+          </button>
+        </nav>
+      </aside>
 
       {/* Main Content */}
-      <div className="w-3/4 p-8">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-semibold">Welcome, {user ? user.displayName : 'User'}!</h1>
-          <button 
-            onClick={handleLogout} 
-            className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
-          >
-            Logout
-          </button>
+      <main className="flex-1 bg-green-50 p-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+          <h1 className="text-3xl font-bold text-green-800 mb-2 sm:mb-0">
+            Hello, {user ? user.displayName || 'User' : '...'} 👋
+          </h1>
+          <p className="text-gray-600 text-sm">Welcome to your BinBuddy dashboard</p>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-bold mb-4">User Information</h2>
+        {/* User Info */}
+        <section className="bg-white p-4 rounded-xl shadow-md mb-6">
+          <h2 className="text-xl font-semibold text-green-700 mb-3">Your Info</h2>
           {user ? (
-            <div>
-              <p><strong>Email:</strong> {user.email}</p>
-              <p><strong>Name:</strong> {user.displayName || 'No name provided'}</p>
-              <p><strong>UID:</strong> {user.uid}</p>
-            </div>
+            <ul className="text-gray-700 space-y-1">
+              <li><strong>Email:</strong> {user.email}</li>
+              <li><strong>Name:</strong> {user.displayName || 'No name provided'}</li>
+              <li><strong>User ID:</strong> {user.uid}</li>
+            </ul>
           ) : (
-            <p>Loading user info...</p>
+            <p>Loading...</p>
           )}
-        </div>
-      </div>
+        </section>
+
+        {/* Waste Classification Upload */}
+        <section className="bg-white p-6 rounded-xl shadow-md">
+          <div className="flex items-center mb-4">
+            <FaTrash className="text-green-700 mr-2 text-2xl" />
+            <h2 className="text-xl font-semibold text-green-700">Classify Waste</h2>
+          </div>
+          <p className="text-gray-600 mb-4">
+            Upload an image of a waste item and let BinBuddy classify it as recyclable, compostable, or landfill.
+          </p>
+          <form className="space-y-4">
+            <input
+              type="file"
+              accept="image/*"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            />
+            <button
+              type="submit"
+              className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+            >
+              Upload & Classify
+            </button>
+          </form>
+        </section>
+      </main>
     </div>
   );
 };
