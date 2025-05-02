@@ -5,7 +5,7 @@ import MainArea from '../components/landingComponents/MainArea';
 import Waitlist from '../components/landingComponents/WaitList';
 import WhyChooseUs from '../components/landingComponents/WhyChooseUs';
 import TheDevelopers from '../components/landingComponents/TheDevelopers';
-
+import Faq from '../components/landingComponents/Faq';
 const Landing = () => {
   return (
     <div className='w-full h-screen overflow-x-hidden'>
@@ -15,6 +15,7 @@ const Landing = () => {
       <Features />
       <TheDevelopers />
       <Waitlist />
+      <Faq/>
       <Footer />
     </div>
   )

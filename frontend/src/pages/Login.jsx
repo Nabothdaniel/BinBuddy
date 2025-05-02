@@ -1,65 +1,99 @@
-import { useState } from 'react';
-import { auth } from '../firbase/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate,Link } from 'react-router-dom'; // For redirection after login
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firbase/firebase";
+import { toast } from "react-toastify";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import LoginIllustration from "../assets/svg/login-illustration.svg";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+// image
+import bgBannner from "../assets/main-bg.png";
 
-  const navigate = useNavigate(); // Hook to navigate after successful login
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
-
+    setLoading(true);
     try {
-      // Sign in with email and password
       await signInWithEmailAndPassword(auth, email, password);
-      setSuccess('Login successful! Redirecting...');
-      setEmail('');
-      setPassword('');
-
-      // Redirect to the dashboard or home page
-      navigate('/dashboard'); // Replace '/dashboard' with your desired route
-    } catch (err) {
-      console.error(err); // Log the error
-      setError('Invalid email or password'); // Display error message
+      toast.success("Logged in successfully!");
+      navigate("/dashboard");
+    } catch (error) {
+      if (error.code === "auth/user-not-found") toast.error("User not found");
+      else if (error.code === "auth/wrong-password") toast.error("Incorrect password");
+      else toast.error("Login failed! Try again");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '0 auto', padding: 20 }}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div
+      className="min-h-screen flex flex-col md:flex-row bg-gray-100"
+      style={{ backgroundImage: `url(${bgBannner})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+    >
+      {/* Left: SVG Illustration */}
+      <div className="hidden md:flex flex-1 justify-center items-center p-10">
+        <img
+          src={LoginIllustration}
+          alt="Login Illustration"
+          className="max-w-md h-[40rem] w-full my-10" // Add top and bottom margin
+        />
+      </div>
+
+      {/* Right: Login Form */}
+      <div className="flex-1 flex justify-center items-center py-8 px-3">
+        <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
+          <h2 className="text-2xl font-bold text-center text-green-600 mb-6">Login to BinBuddy</h2>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              required
+            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 pr-10"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-2.5 text-gray-600"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
+            >
+              {loading ? "Signing in..." : "Login"}
+            </button>
+          </form>
+
+
+          <p className="text-center text-sm mt-4">
+            Don&apos;t have an account?{" "}
+            <a href="/signup" className="text-green-600 hover:underline">
+              Sign Up
+            </a>
+          </p>
         </div>
-        <div style={{ marginTop: 10 }}>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" style={{ marginTop: 20 }} className='bg-green text-white py-2 px-3 rounded-sm sahdwo-sm'>Log In</button>
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
-      <p>not logged in <Link to={'/signup'} className='text-emerald-400'>signup</Link></p>
+      </div>
     </div>
   );
-};
-
-export default Login;
+}

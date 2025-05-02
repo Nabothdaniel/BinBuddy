@@ -1,7 +1,7 @@
 import whyChooseUs from "../../assets/landing/img2.jpg";
 const WhyChooseUs = () => {
   return (
-    <section className="py-16 md:py-28 " id="why-choose-us shadow-sm">
+    <section  className="py-16 md:py-28  shadow-sm" id="why-choose-us">
       <div className="max-w-7xl mx-auto text-center px-5">
         <h2 className="text-3xl font-semibold text-green-700 mb-8 md:text-5xl">Why Choose Us?</h2>
 

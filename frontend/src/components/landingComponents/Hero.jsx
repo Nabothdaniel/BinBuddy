@@ -24,8 +24,8 @@ const slides = [
   },
   {
     id: 3,
-    title: 'Seamless API Integration',
-    text: 'Easily embed our AI capabilities into your web or mobile apps.',
+    title: 'Auto suggest waste disposal points',
+    text: 'Easily locate nearby recycling centers or composting facilities based on your location.',
     image: waste3,
   },
 ];
@@ -57,7 +57,7 @@ const Hero = () => {
   };
 
   return (
-    <div className=" w-full my-10 overflow-hidden">
+    <div className=" w-full my-10 overflow-hidden" id='home'>
       <div className="" />
 
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between px-6 py-12 lg:px-20 gap-10">

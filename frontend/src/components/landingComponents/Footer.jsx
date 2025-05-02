@@ -4,7 +4,7 @@ import Logo from '../../assets/logo.png'
 
 const Footer = () => {
   return (
-    <footer className="bg-green-700 text-white py-8 px-4 mt-10">
+    <footer className="bg-green-600 text-white py-8 px-4 mt-10">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         
         {/* Logo & Description */}
@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="flex items-center mb-2">
             <img src={Logo} alt="binbuddy logo" className="w-26 h-16 object-cover"/>
           </div>
-          <p className="text-sm">
+          <p className="text-[15px] md:text-[17px]">
             Your smart waste sorting assistant. Make recycling easy, efficient, and fun!
           </p>
         </div>
