@@ -53,7 +53,7 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" style={{ marginTop: 20 }}>Log In</button>
+        <button type="submit" style={{ marginTop: 20 }} className='bg-green text-white py-2 px-3 rounded-sm sahdwo-sm'>Log In</button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>{success}</p>}
