@@ -4,7 +4,7 @@ import Logo from '../../assets/logo.png'
 
 const Footer = () => {
   return (
-    <footer className="bg-green-600 text-white py-8 px-4 mt-10">
+    <footer className="bg-white text-black py-8 px-4 mt-10">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         
         {/* Logo & Description */}
@@ -19,7 +19,7 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Quick Links</h3>
+          <h3 className="text-lg font-semibold mb-2 text-green-600">Quick Links</h3>
           <ul className="text-sm space-y-1">
             <li><a href="/about" className="hover:underline">About Us</a></li>
             <li><a href="/how-it-works" className="hover:underline">How It Works</a></li>
@@ -30,16 +30,16 @@ const Footer = () => {
 
         {/* Social Media */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
+          <h3 className="text-lg font-semibold mb-2 text-green-600">Follow Us</h3>
           <div className="flex space-x-4">
-            <a href="#" aria-label="Facebook" className="hover:text-gray-300"><FaFacebook /></a>
-            <a href="#" aria-label="Twitter" className="hover:text-gray-300"><FaTwitter /></a>
-            <a href="#" aria-label="Instagram" className="hover:text-gray-300"><FaInstagram /></a>
+            <a href="#" aria-label="Facebook" className=""><FaFacebook /></a>
+            <a href="#" aria-label="Twitter" className=""><FaTwitter /></a>
+            <a href="#" aria-label="Instagram" className=""><FaInstagram /></a>
           </div>
         </div>
       </div>
 
-      <div className="mt-8 text-center text-sm text-gray-200">
+      <div className="mt-8 text-center text-sm">
         &copy; {new Date().getFullYear()} BinBuddy. All rights reserved.
       </div>
     </footer>
