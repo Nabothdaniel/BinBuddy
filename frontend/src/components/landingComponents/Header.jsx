@@ -1,6 +1,18 @@
 import { useState } from 'react';
-import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
+import {
+  FiMenu,
+  FiX,
+  FiChevronDown,
+  FiHome,
+  FiSettings,
+  FiInfo,
+  FiPhone,
+  FiLayers,
+  FiDollarSign,
+  FiList,
+} from 'react-icons/fi';
 import Logo from '../../assets/logo.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +25,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="w-full bg-transparent p-4">
+    <nav className="w-full md:w-auto bg-transparent p-4 md:py-[0.3rem] md:fixed md:top-0 left-0 right-4  md:bg-black md:z-[999]">
       {/* Inner Container */}
       <div className="max-w-screen-xl mx-auto flex items-center justify-between">
         {/* Logo */}
@@ -31,36 +43,54 @@ const Header = () => {
         </button>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-10 bg-white/10 px-4 py-2 rounded shadow-md backdrop-blur-md text-white">
-          <a href="#home" className="hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded">Home</a>
-
-         
-
-          <a href="#why-choose-us" className="hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded">About Us</a>
-          <a href="#" className="hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded">Pricing</a>
-          <a href="#" className="hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded">Contact</a>
+        <div className="hidden md:flex gap-10 md:sahdow-sm bg-white/10 px-4 py-2 rounded shadow-md backdrop-blur-md text-white">
+          <a href="#home" className="hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
+            <FiHome /> Home
+          </a>
+          <a href="#how-it-works" className="hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
+            <FiSettings /> How It Works
+          </a>
+          <a href="#why-choose-us" className="hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
+            <FiInfo /> Why Choose Us
+          </a>
+      
 
           <div className="relative">
             <button
               onClick={() => setIsDesktopDropdownOpen(prev => !prev)}
               className="hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2"
             >
-              Extra <FiChevronDown className={`ml-2 transition-transform ${isDesktopDropdownOpen ? 'rotate-180' : ''}`} />
+              <FiList /> Extra
+              <FiChevronDown className={`ml-1 transition-transform ${isDesktopDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
             {isDesktopDropdownOpen && (
               <ul className="absolute mt-2 bg-black/70 text-white rounded shadow-lg z-50 w-40 px-3 py-2">
                 <li>
-                  <a href="#" className="block hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded">Nested 1</a>
+                  <a href="#" className=" hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
+                    <FiLayers /> Nested 1
+                  </a>
                 </li>
                 <li>
-                  <a href="#" className="block hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded">Nested 2</a>
+                  <a href="#" className=" hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
+                    <FiLayers /> Nested 2
+                  </a>
                 </li>
                 <li>
-                  <a href="#" className="block hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded">Nested 3</a>
+                  <a href="#" className=" hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
+                    <FiLayers /> Nested 3
+                  </a>
                 </li>
+
               </ul>
             )}
+             
           </div>
+          <Link to="/login" className="bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
+            Login
+          </Link>
+          <Link to="/signup" className="bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
+            Signup
+          </Link>
         </div>
       </div>
 
@@ -72,7 +102,7 @@ const Header = () => {
 
       {/* Mobile Sidebar */}
       <div
-        className={`block md:hidden fixed top-0 right-0 h-full w-64 bg-black/70 text-white p-4 z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={` md:hidden fixed top-0 right-0 h-full w-64 bg-black/70 text-white p-4 z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center  pb-2">
@@ -83,23 +113,28 @@ const Header = () => {
         </div>
 
         <ul className="mt-4 space-y-4">
-          <li><a href="#" className="block hover:bg-emerald-700 px-4 py-2 rounded">Home</a></li>
+          <li><a href="#" className=" hover:bg-emerald-700 px-4 py-2 rounded flex items-center gap-2"><FiHome /> Home</a></li>
           <li>
             <button
               onClick={() => setIsMobileDropdownOpen(prev => !prev)}
               className="w-full text-left flex items-center justify-between hover:bg-emerald-700 px-4 py-2 rounded"
             >
-              Dropdown <FiChevronDown className={`transition-transform ${isMobileDropdownOpen ? 'rotate-180' : ''}`} />
+              <span className="flex items-center gap-2"><FiList /> Dropdown</span>
+              <FiChevronDown className={`transition-transform ${isMobileDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
             {isMobileDropdownOpen && (
               <ul className="pl-4 mt-2 space-y-2">
-                <li><a href="#" className="block hover:bg-gray-600 px-2 py-1 rounded">Nested 1</a></li>
+                <li>
+                  <a href="#" className=" hover:bg-gray-600 px-2 py-1 rounded flex items-center gap-2">
+                    <FiLayers /> Nested 1
+                  </a>
+                </li>
               </ul>
             )}
           </li>
-          <li><a href="#" className="block hover:bg-emerald-700 px-4 py-2 rounded">Services</a></li>
-          <li><a href="#" className="block hover:bg-emerald-700 px-4 py-2 rounded">Pricing</a></li>
-          <li><a href="#" className="block hover:bg-emerald-700 px-4 py-2 rounded">Contact</a></li>
+          <li><a href="#" className=" hover:bg-emerald-700 px-4 py-2 rounded flex items-center gap-2"><FiSettings /> Services</a></li>
+          <li><a href="#" className=" hover:bg-emerald-700 px-4 py-2 rounded flex items-center gap-2"><FiDollarSign /> Pricing</a></li>
+          <li><a href="#" className=" hover:bg-emerald-700 px-4 py-2 rounded flex items-center gap-2"><FiPhone /> Contact</a></li>
         </ul>
       </div>
     </nav>

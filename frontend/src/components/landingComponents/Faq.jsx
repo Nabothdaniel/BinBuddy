@@ -28,9 +28,9 @@ export default function FAQSection() {
   };
 
   return (
-    <section className=" py-12 md:my-28 px-6 md:px-20">
+    <section className=" py-12 md:my-16 px-6 md:px-20">
       <h2 className="text-3xl md:text-4xl text-green-700  font-bold text-center mb-8">Frequently Asked Questions</h2>
-      <div className="max-w-3xl mx-auto space-y-4">
+      <div className="max-w-7xl mx-auto space-y-4">
         {faqs.map((faq, index) => {
           const isActive = index === activeIndex;
           return (

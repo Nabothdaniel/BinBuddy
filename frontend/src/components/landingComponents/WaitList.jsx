@@ -1,21 +1,34 @@
-import {useState} from 'react';
+import { useState } from 'react';
+
 const Waitlist = () => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You'd send this to your backend or service like Mailchimp, etc.
     console.log("Email submitted:", email);
     setSubmitted(true);
   };
 
   return (
-    <div className=" bg-green-50 flex flex-col justify-center items-center px-4 py-">
-      <div className="max-w-md w-full bg-white shadow-xl rounded-2xl p-8 text-center">
-        <h1 className="text-3xl font-bold text-green-700 mb-4">Join the BinBuddy Waitlist</h1>
+    <div className="bg-green-50 flex flex-col md:flex-row justify-center items-center px-4 py-10 max-w-7xl mx-auto">
+      
+      {/* Left Side Text */}
+      <div className="md:w-1/2 mb-8 md:mb-0 md: text-center md:text-left">
+        <h1 className="text-4xl font-bold text-green-700 mb-4">
+          Be Part of the BinBuddy Movement
+        </h1>
+        <p className="text-gray-700 text-lg">
+          Our AI-powered assistant helps you sort your waste better and protect the environment.
+          Join the waitlist and be among the first to make waste management smarter!
+        </p>
+      </div>
+
+      {/* Right Side Form */}
+      <div className="md:w-1/2  w-full bg-white shadow-xl rounded-2xl p-8 text-center">
+        <h2 className="text-2xl font-bold text-green-700 mb-4">Join the Waitlist</h2>
         <p className="text-gray-600 mb-6">
-          Be the first to get access to our AI-powered waste sorting assistant.
+          Get early access to BinBuddy when we launch.
         </p>
 
         {!submitted ? (

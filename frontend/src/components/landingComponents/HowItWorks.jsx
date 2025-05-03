@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 const HowItWorks = () => {
   return (
-    <section className="py-16 px-3 md:px- " id="how-it-works">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="py-16 px-3 md:px-10  " id="how-it-works">
+      <div className="max-w-7xl mx-auto text-center">
         <h2 className=" font-semibold text-green-700 text-4xl mb-[3rem]">How BinBuddy Works</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Step 1 */}

@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
-import {Link} from 'react-router-dom';
+import {HiCog} from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 
 //images
 
@@ -57,10 +58,18 @@ const Hero = () => {
   };
 
   return (
-    <div className=" w-full my-10 overflow-hidden" id='home'>
-      <div className="" />
-
-      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between px-6 py-12 lg:px-20 gap-10">
+    <div className=" w-full h-auto my-10 overflow-hidden" id='home'>
+      <div className=" md:px-[3.2rem] py-5 md:py-[2rem]" />
+      <motion.div
+        initial={{ x: 0 }}
+        animate={{ x: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        className=" md:ml-28 inline-flex items-center gap-2 bg-yellow-100 border border-green-300 text-green-800 text-sm font-semibold px-4 py-1 rounded-full shadow-md z-10"
+      >
+        <HiCog className="animate-spin-slow text-green-600" />
+        Building in Progress
+      </motion.div>
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between px-6 md:px-26 gap-10">
         <motion.div
           key={slides[current].id}
           initial={{ opacity: 0, x: -40 }}
@@ -71,12 +80,12 @@ const Hero = () => {
           <h1 className="text-4xl md:text-[4rem] font-bold text-white mb-4">{slides[current].title}</h1>
           <p className="text-lg text-white mb-6">{slides[current].text}</p>
           <Link to='/signup' className='inline-flex items-center '>
-          <button className="bg-green-600 hover:bg-green-800 transition cursor-pointer text-white px-5 py-3 rounded-sm ">
-            Get Started
-          </button>
-          <button className="bg-green-600 hover:bg-green-800 transition cursor-pointer text-white px-5 py-4 rounded-lg">
-            <FaChevronRight/>
-          </button>
+            <button className="bg-green-600 hover:bg-green-800 transition cursor-pointer text-white px-5 py-3 rounded-sm ">
+              Get Started
+            </button>
+            <button className="bg-green-600 hover:bg-green-800 transition cursor-pointer text-white px-5 py-4 rounded-lg">
+              <FaChevronRight />
+            </button>
           </Link>
 
           <div className="mt-6 flex justify-center lg:justify-start gap-4">

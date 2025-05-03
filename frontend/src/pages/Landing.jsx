@@ -11,11 +11,11 @@ const Landing = () => {
     <div className='w-full h-screen overflow-x-hidden'>
       <MainArea />
       <HowItWorks />
-      <WhyChooseUs />
       <Features />
+      <WhyChooseUs />
       <TheDevelopers />
       <Waitlist />
-      <Faq/>
+      <Faq />
       <Footer />
     </div>
   )

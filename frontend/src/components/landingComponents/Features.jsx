@@ -42,8 +42,8 @@ const Features = () => {
   ];
 
   return (
-    <section className="py-16 px-3" id="features">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="py-16 md:py-16 px-3" id="Features">
+      <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-3xl md:text-6xl font-semibold text-green-700 mb-8">Features</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
