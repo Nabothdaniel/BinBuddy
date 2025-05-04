@@ -15,7 +15,7 @@ import Dashboard from './pages/Dashboard.jsx';
 
 //dashboard sub-pages
 import Home from './components/Dashboard/Home.jsx';
-import Suggestions from './components/Dashboard/suggestions.jsx';
+import Suggestions from './components/Dashboard/Suggestions.jsx';
 import Upload from './components/Dashboard/Upload.jsx';
 
 const router = createBrowserRouter([

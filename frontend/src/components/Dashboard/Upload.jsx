@@ -3,7 +3,7 @@ import React from 'react'
 const Upload = () => {
   return (
     <div>
-      uploas
+      upload section
     </div>
   )
 }
