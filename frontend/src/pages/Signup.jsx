@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { auth, googleProvider } from '../firbase/firebase';
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup } from "firebase/auth";
 import { Link, useNavigate } from 'react-router-dom';
-import SignupIllustration from "../assets/SVG/login-illustration.svg"; 
+import SignupIllustration from "../assets/svg/login-illustration.svg"; 
 import googleLogo from "../assets/google-logo.png";
 import bgBannner from "../assets/main-bg.png";
 import { toast } from 'react-toastify';
