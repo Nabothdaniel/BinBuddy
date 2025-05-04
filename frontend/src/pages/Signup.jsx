@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { auth, googleProvider } from '../firbase/firebase';
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup } from "firebase/auth";
 import { Link, useNavigate } from 'react-router-dom';
-import SignupIllustration from "../assets/SVG/login-illustration.svg"; // Replace with your SVG if available
-import  googleLogo from "../assets/google-logo.png"
+import SignupIllustration from "../assets/SVG/login-illustration.svg"; 
+import googleLogo from "../assets/google-logo.png";
 import bgBannner from "../assets/main-bg.png";
+import { toast } from 'react-toastify';
 
 const Signup = () => {
     const [email, setEmail] = useState('');
@@ -15,6 +16,11 @@ const Signup = () => {
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+
+    const setAuthCookie = (idToken) => {
+        // Set the token as a secure HTTP-only cookie
+        document.cookie = `firebase_token=${idToken}; Secure; HttpOnly; SameSite=Strict; path=/`;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,10 +33,18 @@ const Signup = () => {
             await updateProfile(userCredential.user, {
                 displayName: username
             });
+
+            // Get the ID token after signup
+            const idToken = await userCredential.user.getIdToken();
+
+            // Set the token as an HTTP-only cookie
+            setAuthCookie(idToken);
+
             setSuccess('Signup successful! You can now log in.');
             setEmail('');
             setPassword('');
             setUsername('');
+            toast.success('Signup successful! You can now log in.')
             navigate("/login");
         } catch (err) {
             setError(err.message);
@@ -42,8 +56,17 @@ const Signup = () => {
     const handleGoogleSignup = async () => {
         setError('');
         try {
-            await signInWithPopup(auth, googleProvider);
+            const result = await signInWithPopup(auth, googleProvider);
+            const user = result.user;
+
+            // Get the ID token after Google sign-in
+            const idToken = await user.getIdToken();
+
+            // Set the token as an HTTP-only cookie
+            setAuthCookie(idToken);
+
             navigate("/dashboard"); // Adjust redirect path as needed
+            toast.success('signup succesful')
         } catch (err) {
             setError(err.message);
         }
@@ -54,7 +77,6 @@ const Signup = () => {
             className="min-h-screen flex flex-col md:flex-row bg-gray-100"
             style={{ backgroundImage: `url(${bgBannner})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         >
-            {/* Left: Illustration */}
             <div className="hidden md:flex flex-1 justify-center items-center p-10">
                 <img
                     src={SignupIllustration}
@@ -63,7 +85,6 @@ const Signup = () => {
                 />
             </div>
 
-            {/* Right: Signup Form */}
             <div className="flex-1 flex justify-center items-center py-8 px-3">
                 <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
                     <h2 className="text-2xl font-bold text-center text-green-600 mb-6">Sign Up for BinBuddy</h2>
@@ -110,17 +131,16 @@ const Signup = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className=" cursor-pointer w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            className="cursor-pointer w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
                         >
                             {loading ? "Signing Up..." : "Sign Up"}
                         </button>
                     </form>
 
-                    {/* Google Signup Button */}
                     <div className="mt-4">
                         <button
                             onClick={handleGoogleSignup}
-                            className=" cursor-pointer w-full py-3 border border-gray-300 flex items-center justify-center gap-2 rounded-lg hover:bg-gray-100 transition"
+                            className="cursor-pointer w-full py-3 border border-gray-300 flex items-center justify-center gap-2 rounded-lg hover:bg-gray-100 transition"
                         >
                             <img src={googleLogo} alt="Google" className="h-5 w-5" />
                             <span className="text-sm font-medium text-gray-700">Sign up with Google</span>

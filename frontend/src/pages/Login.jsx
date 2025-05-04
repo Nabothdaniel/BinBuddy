@@ -66,6 +66,7 @@ export default function Login() {
       navigate("/dashboard");
     } catch (error) {
       toast.error("Google login failed");
+      console.log(error.message)
     } finally {
       setLoading(false);
     }

@@ -1,6 +1,5 @@
-import React from 'react'
 
-constSuggestions = () => {
+const Suggestions = () => {
   return (
     <div>
      Suggest

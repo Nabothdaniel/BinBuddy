@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { auth } from '../firbase/firebase';
 import { signOut } from 'firebase/auth';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaRecycle, FaUser, FaCog, FaSignOutAlt, FaTrash } from 'react-icons/fa';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { FaRecycle, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -25,14 +25,14 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Sidebar */}
-      <aside className="bg-green-700 text-white w-full md:w-1/4 p-5 flex flex-col space-y-6 md:min-h-screen">
+      <aside className="bg-green-700 text-white w-full md:w-[15rem] p-5 flex flex-col space-y-6 md:min-h-screen">
         <Link to="/" className="text-2xl font-bold">BinBuddy</Link>
         <nav className="flex flex-col gap-4">
-          <Link to="/" className="flex items-center gap-2 hover:text-green-200">
+          <Link to="/dashboard/home" className="flex items-center gap-2 hover:text-green-200">
             <FaRecycle /> Home
           </Link>
-          <Link to="/profile" className="flex items-center gap-2 hover:text-green-200">
-            <FaUser /> Profile
+          <Link to="/dashboard/upload" className="flex items-center gap-2 hover:text-green-200">
+            <FaUser /> Upload
           </Link>
           <Link to="/settings" className="flex items-center gap-2 hover:text-green-200">
             <FaCog /> Settings
@@ -69,6 +69,10 @@ const Dashboard = () => {
           )}
         </section>
 
+        <main>
+          <Outlet />
+
+        </main>
       </main>
     </div>
   );
