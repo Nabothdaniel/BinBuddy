@@ -11,6 +11,9 @@ import {
   FiDollarSign,
   FiList,
 } from 'react-icons/fi';
+import { FaAudible } from "react-icons/fa6";
+import { IoPersonOutline } from "react-icons/io5";
+import { LuLockKeyholeOpen } from "react-icons/lu";
 import Logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 
@@ -39,7 +42,7 @@ const Header = () => {
           className="md:hidden flex items-center p-2 w-10 h-10 justify-center text-gray-900 rounded-full hover:bg-gray-300"
           onClick={toggleMenu}
         >
-           <FiMenu className="w-5 h-5" />
+          <FiMenu className="w-5 h-5" />
         </button>
 
         {/* Desktop Menu */}
@@ -50,10 +53,13 @@ const Header = () => {
           <a href="#how-it-works" className="hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
             <FiSettings /> How It Works
           </a>
+          <a href="#Features" className="hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
+            <FaAudible /> Features
+          </a>
           <a href="#why-choose-us" className="hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
             <FiInfo /> Why Choose Us
           </a>
-      
+
 
           <div className="relative">
             <button
@@ -66,24 +72,19 @@ const Header = () => {
             {isDesktopDropdownOpen && (
               <ul className="absolute mt-2 bg-black/70 text-white rounded shadow-lg z-50 w-40 px-3 py-2">
                 <li>
-                  <a href="#" className=" hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
-                    <FiLayers /> Nested 1
+                  <a href="#developers" className=" hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
+                    <IoPersonOutline /> Developers
                   </a>
                 </li>
                 <li>
-                  <a href="#" className=" hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
-                    <FiLayers /> Nested 2
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className=" hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
-                    <FiLayers /> Nested 3
+                  <a href="#waitlist" className=" hover:bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
+                    <LuLockKeyholeOpen /> WaitList
                   </a>
                 </li>
 
               </ul>
             )}
-             
+
           </div>
           <Link to="/login" className="bg-white/20 hover:text-green-400 hover:duration-250 px-3 py-1 rounded flex items-center gap-2">
             Login

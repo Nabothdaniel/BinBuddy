@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 //images
 
 import waste1 from '../../assets/landing/waste-1.jpg';
-import waste2 from '../../assets/landing/waste-2.jpg';
-import waste3 from '../../assets/landing/waste-3.jpg';
+import waste2 from '../../assets/landing/waste-3.jpg';
+import waste3 from '../../assets/landing/waste-4.jpg';
 
 const slides = [
   {

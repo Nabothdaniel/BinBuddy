@@ -11,7 +11,7 @@ const Waitlist = () => {
   };
 
   return (
-    <div className="bg-green-50 flex flex-col md:flex-row justify-center items-center px-4 py-10 max-w-7xl mx-auto">
+    <div className="bg-green-50 flex flex-col md:flex-row justify-center items-center px-4 py-10 max-w-7xl mx-auto" id='waitlist'>
       
       {/* Left Side Text */}
       <div className="md:w-1/2 mb-8 md:mb-0 md: text-center md:text-left">

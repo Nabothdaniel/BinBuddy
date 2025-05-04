@@ -30,7 +30,7 @@ const developers = [
 
 const Developers = () => {
   return (
-    <div className="min-h-screen bg-green-50 py-10 md:py-10 px-4">
+    <div className="min-h-screen bg-green-50 py-10 md:py-10 px-4" id="developers">
       <div className="max-w-7xl mx-auto text-center">
         <h1 className="text-4xl font-bold text-green-700 mb-4">Meet the Developers</h1>
         <p className="text-gray-600 mb-10">
