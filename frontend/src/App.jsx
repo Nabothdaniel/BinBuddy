@@ -1,31 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import Landing from './pages/Landing';
 import bgBanner from './assets/main-bg.png';
-import Loader from './components/utils/Loader';  // Import the Loader component
+import Loader from './components/utils/Loader';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Replace this with your actual data fetching logic
-    document.addEventListener('DOMContentLoaded',()=>{
-      setLoading(false)
-    })// Call the function to start fetching data
-  }, []); // Empty dependency array to run once when the component mounts
+    // Simulate a small delay before loading content
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500); // 1.5s delay for smooth UX
+
+    return () => clearTimeout(timer); // Clean up the timer on unmount
+  }, []);
 
   return (
     <div className="w-screen h-screen relative">
       {/* Background Image */}
       <main
         style={{ backgroundImage: `url(${bgBanner})` }}
-        className="w-full h-full bg-cover bg-center bg-no-repeat"
+        className="w-full h-full bg-cover bg-center bg-no-repeat relative"
       >
-        {/* Show the loader when loading is true */}
-        {loading && <Loader />}
-        
-    
-        {/* Landing Page Content */}
-        {!loading && <Landing />} {/* Show Landing when loading is false */}
+        {/* Loader Overlay */}
+        {loading && (
+          <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+            <Loader />
+          </div>
+        )}
+
+        {/* Main Content */}
+        {!loading && <Landing />}
       </main>
     </div>
   );
