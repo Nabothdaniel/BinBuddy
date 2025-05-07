@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
@@ -12,7 +13,7 @@ const faqs = [
   },
   {
     question: "Does BinBuddy store my data?",
-    answer: "Yes we may collect some of your data to imporve our services but we do not share it with third parties.",
+    answer: "Yes we may collect some of your data to improve our services but we do not share it with third parties.",
   },
   {
     question: "Can I use BinBuddy in any location?",
@@ -28,29 +29,48 @@ export default function FAQSection() {
   };
 
   return (
-    <section className=" py-12 md:my-16 px-6 md:px-20">
-      <h2 className="text-3xl md:text-4xl text-green-700  font-bold text-center mb-8">Frequently Asked Questions</h2>
+    <section className="py-12 md:my-16 px-6 md:px-20">
+      <h2 className="text-3xl md:text-4xl text-green-700 font-bold text-center mb-8">
+        Frequently Asked Questions
+      </h2>
       <div className="max-w-7xl mx-auto space-y-4">
         {faqs.map((faq, index) => {
           const isActive = index === activeIndex;
           return (
-            <div
+            <motion.div
               key={index}
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
               className="bg-white p-6 rounded-2xl shadow cursor-pointer"
               onClick={() => toggleFAQ(index)}
             >
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-600">{faq.question}</h3>
-                <FaChevronDown
-                  className={`w-4 h-4 text-green-600 transition-transform duration-300 ${
-                    isActive ? "rotate-180" : ""
-                  }`}
-                />
+                <motion.div
+                  animate={{ rotate: isActive ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <FaChevronDown className="w-4 h-4 text-green-600" />
+                </motion.div>
               </div>
-              {isActive && (
-                <p className="text-gray-700 mt-4 transition-all">{faq.answer}</p>
-              )}
-            </div>
+
+              <AnimatePresence initial={false}>
+                {isActive && (
+                  <motion.p
+                    key="answer"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-gray-700 mt-4 overflow-hidden"
+                  >
+                    {faq.answer}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </motion.div>
           );
         })}
       </div>

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { FiCheckCircle, FiThumbsUp, FiSearch, FiZap, FiMapPin } from 'react-icons/fi';
 import { FaRecycle } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+
+import { cardVariants } from '../../utils/constants';
 
 const Features = () => {
   const [showMore, setShowMore] = useState(false);
@@ -44,18 +47,27 @@ const Features = () => {
   return (
     <section className="py-16 md:py-16 px-3" id="Features">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-3xl md:text-6xl font-semibold text-green-700 mb-8">Features</h2>
+        <motion.h2 
+           initial={{ opacity: 0, y: -20 }}
+           animate={{ opacity: 1, y: 0 }}
+           transition={{ duration: 0.6 }}
+        className="text-3xl md:text-6xl font-semibold text-green-700 mb-8">Features</motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {coreFeatures.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
+              custom={index}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
               className="p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition duration-300"
             >
               <div className="text-green-500 text-4xl mb-4">{feature.icon}</div>
               <h3 className="text-xl font-semibold text-gray-800">{feature.title}</h3>
               <p className="mt-2 text-gray-600">{feature.description}</p>
-            </div>
+            </motion.div>
           ))}
 
           {showMore &&

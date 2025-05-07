@@ -1,15 +1,26 @@
 import { useState, useEffect } from 'react';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firbase/firebase';
-import { signOut } from 'firebase/auth';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { FaRecycle, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import {
+  FaSignOutAlt, FaCog, FaBell, FaSearch, FaUser, FaBars, FaTimes,
+} from 'react-icons/fa';
+import { HiOutlineViewGrid } from 'react-icons/hi';
+
+import bgBanner from '../assets/main-bg.png'
+import Footer from '../components/landingComponents/Footer';
+import Header from '../components/Dashboard/Header';
 
 const Dashboard = () => {
-  const [user, setUser] = useState(null);
+  const [setUser] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(setUser);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
     return () => unsubscribe();
   }, []);
 
@@ -17,63 +28,89 @@ const Dashboard = () => {
     try {
       await signOut(auth);
       navigate('/login');
+      toast.success('logged out succesfully')
     } catch (err) {
       console.error('Error logging out: ', err.message);
+      toast.error('logout error')
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <div className="flex h-screen overflow-hidden bg-gray-50 object-cover " style={{ backgroundImage: `url(${bgBanner})` }}>
       {/* Sidebar */}
-      <aside className="bg-green-700 text-white w-full md:w-[15rem] p-5 flex flex-col space-y-6 md:min-h-screen">
-        <Link to="/" className="text-2xl font-bold">BinBuddy</Link>
-        <nav className="flex flex-col gap-4">
-          <Link to="/dashboard/home" className="flex items-center gap-2 hover:text-green-200">
-            <FaRecycle /> Home
-          </Link>
-          <Link to="/dashboard/upload" className="flex items-center gap-2 hover:text-green-200">
-            <FaUser /> Upload
-          </Link>
-          <Link to="/settings" className="flex items-center gap-2 hover:text-green-200">
-            <FaCog /> Settings
-          </Link>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 text-left hover:text-red-300"
-          >
+      <aside
+        className={`fixed z-40 top-0 left-0 h-full w-64 bg-white shadow-lg border-r transform transition-transform duration-200 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          } md:relative md:translate-x-0 md:flex md:flex-col md:w-64`}
+      >
+        <div className="flex flex-col justify-between h-full p-4">
+          <div>
+            <div className="flex justify-between items-center mb-6">
+              <Link to='/' className="text-2xl font-bold text-green-700">BinBuddy</Link>
+              <button
+                className="md:hidden text-gray-500"
+                onClick={() => setSidebarOpen(false)}
+              >
+                <FaTimes />
+              </button>
+            </div>
+
+
+            <nav className="space-y-4 text-gray-700 my-10 ">
+              <Link to="/dashboard/home" className="flex items-center gap-3 hover:text-green-600">
+                <HiOutlineViewGrid /> Dashboard
+              </Link>
+              <Link to="/dashboard/upload" className="flex items-center gap-3 hover:text-green-600">
+                <FaUser /> Upload
+              </Link>
+              <Link to="/settings" className="flex items-center gap-3 hover:text-green-600">
+                <FaCog /> Settings
+              </Link>
+            </nav>
+          </div>
+
+          <button onClick={handleLogout} className="flex items-center gap-2 text-red-500 hover:text-red-600">
             <FaSignOutAlt /> Logout
           </button>
-        </nav>
+        </div>
       </aside>
 
+      {/* Overlay for mobile */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/30 bg-opacity-50 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Main Content */}
-      <main className="flex-1 bg-green-50 p-6">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-          <h1 className="text-3xl font-bold text-green-800 mb-2 sm:mb-0">
-            Hello, {user ? user.displayName || 'User' : '...'} 👋
-          </h1>
-          <p className="text-gray-600 text-sm">Welcome to your BinBuddy dashboard</p>
-        </div>
+      <div className="flex-1 overflow-auto">
+        {/* Mobile Navbar */}
+        <header className="md:hidden bg-white shadow-sm px-4 py-3 flex justify-between items-center">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="text-gray-700 text-xl"
+          >
+            <FaBars />
+          </button>
+          <Link to='/' className="text-lg font-bold text-green-700">Binbudy</Link >
+          <div className="flex items-center gap-4">
+            <FaBell className="text-gray-500" />
+            <FaUser className="text-gray-500" />
+          </div>
+        </header>
 
-        {/* User Info */}
-        <section className="bg-white p-4 rounded-xl shadow-md mb-6">
-          <h2 className="text-xl font-semibold text-green-700 mb-3">Your Info</h2>
-          {user ? (
-            <ul className="text-gray-700 space-y-1">
-              <li><strong>Email:</strong> {user.email}</li>
-              <li><strong>Name:</strong> {user.displayName || 'No name provided'}</li>
-              <li><strong>User ID:</strong> {user.uid}</li>
-            </ul>
-          ) : (
-            <p>Loading...</p>
-          )}
-        </section>
+        {/* Desktop Header */}
+        <Header />
 
-        <main>
+        {/* Body */}
+        <main className="p-4 md:p-6 space-y-6">
+          {/* Quick Actions */}
+
+
           <Outlet />
-
         </main>
-      </main>
+        <Footer />
+      </div>
     </div>
   );
 };

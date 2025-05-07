@@ -24,7 +24,7 @@ const App = () => {
       >
         {/* Loader Overlay */}
         {loading && (
-          <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm">
             <Loader />
           </div>
         )}

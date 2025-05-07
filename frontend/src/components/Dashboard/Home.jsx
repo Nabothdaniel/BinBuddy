@@ -2,7 +2,7 @@ import { FaTrash } from 'react-icons/fa6'
 const Home = () => {
     return (
 
-            <section className="bg-white p-6 rounded-xl shadow-md">
+            <section className="bg-white p-6 rounded-xl shadow-md my-10">
             {/* Waste Classification Upload */}
 
                 <div className="flex items-center mb-4">
