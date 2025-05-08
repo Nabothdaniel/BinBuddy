@@ -4,16 +4,22 @@ import { auth } from '../firbase/firebase';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
-  FaSignOutAlt, FaCog, FaBell, FaSearch, FaUser, FaBars, FaTimes,
+   FaBars,
 } from 'react-icons/fa';
+import { MdOutlinePerson } from "react-icons/md";
 import { HiOutlineViewGrid } from 'react-icons/hi';
+import { SlCloudUpload } from "react-icons/sl";
+import { IoIosLogOut } from "react-icons/io";
+import { FiX } from 'react-icons/fi';
+
 
 import bgBanner from '../assets/main-bg.png'
 import Footer from '../components/landingComponents/Footer';
 import Header from '../components/Dashboard/Header';
+import DashboardCard from '../components/Dashboard/DashboardCard';
 
 const Dashboard = () => {
-  const [setUser] = useState(null);
+  const [user,setUser] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -39,7 +45,7 @@ const Dashboard = () => {
     <div className="flex h-screen overflow-hidden bg-gray-50 object-cover " style={{ backgroundImage: `url(${bgBanner})` }}>
       {/* Sidebar */}
       <aside
-        className={`fixed z-40 top-0 left-0 h-full w-64 bg-white shadow-lg border-r transform transition-transform duration-200 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed z-40 top-0 left-0 h-full w-64 shadow-lg bg-white border-r transform transition-transform duration-200 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
           } md:relative md:translate-x-0 md:flex md:flex-col md:w-64`}
       >
         <div className="flex flex-col justify-between h-full p-4">
@@ -50,26 +56,30 @@ const Dashboard = () => {
                 className="md:hidden text-gray-500"
                 onClick={() => setSidebarOpen(false)}
               >
-                <FaTimes />
+                <FiX className='w-5 h-5 cursor-pointer' />
               </button>
             </div>
 
 
             <nav className="space-y-4 text-gray-700 my-10 ">
-              <Link to="/dashboard/home" className="flex items-center gap-3 hover:text-green-600">
+
+              <p className='text-xl font-bold my-5'>NAVIGATION</p>
+              <Link to="/dashboard/home" className="flex items-center gap-3 text-green-600 hover:duration-150 hover:text-white hover:bg-green-600 py-2 px-3 rounded-md">
                 <HiOutlineViewGrid /> Dashboard
               </Link>
-              <Link to="/dashboard/upload" className="flex items-center gap-3 hover:text-green-600">
-                <FaUser /> Upload
+              <Link to="/dashboard/upload" className="flex items-center gap-3 text-green-600 hover:duration-150 hover:text-white hover:bg-green-600 py-2 px-3 rounded-md">
+                <SlCloudUpload /> Upload
               </Link>
-              <Link to="/settings" className="flex items-center gap-3 hover:text-green-600">
-                <FaCog /> Settings
+              <Link to="/dashboard/profile" className="flex items-center gap-3 text-green-600 hover:duration-150 hover:text-white hover:bg-green-600 py-2 px-3 rounded-md">
+                <MdOutlinePerson /> Profile
               </Link>
+
+
             </nav>
           </div>
 
           <button onClick={handleLogout} className="flex items-center gap-2 text-red-500 hover:text-red-600">
-            <FaSignOutAlt /> Logout
+            <IoIosLogOut /> Logout
           </button>
         </div>
       </aside>
@@ -86,17 +96,14 @@ const Dashboard = () => {
       <div className="flex-1 overflow-auto">
         {/* Mobile Navbar */}
         <header className="md:hidden bg-white shadow-sm px-4 py-3 flex justify-between items-center">
+        
+          <Link to='/' className="text-lg font-bold text-green-700">Binbudy</Link >
           <button
             onClick={() => setSidebarOpen(true)}
             className="text-gray-700 text-xl"
           >
             <FaBars />
           </button>
-          <Link to='/' className="text-lg font-bold text-green-700">Binbudy</Link >
-          <div className="flex items-center gap-4">
-            <FaBell className="text-gray-500" />
-            <FaUser className="text-gray-500" />
-          </div>
         </header>
 
         {/* Desktop Header */}
@@ -105,8 +112,7 @@ const Dashboard = () => {
         {/* Body */}
         <main className="p-4 md:p-6 space-y-6">
           {/* Quick Actions */}
-
-
+          <DashboardCard />
           <Outlet />
         </main>
         <Footer />

@@ -17,6 +17,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import Home from './components/Dashboard/Home.jsx';
 import Suggestions from './components/Dashboard/Suggestions.jsx';
 import Upload from './components/Dashboard/Upload.jsx';
+import Profile from './components/Dashboard/Profile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -36,16 +37,24 @@ const router = createBrowserRouter([
     element: <Dashboard />,
     children: [
       {
-        path:'home', // this is for the default route within /dashboard
+        index: true, // default route for /dashboard
         element: <Home />
       },
       {
-        path: 'upload', // path for the Upload page
+        path: 'home',
+        element: <Home />
+      },
+      {
+        path: 'upload',
         element: <Upload />
       },
       {
-        path: 'suggestions', // path for the Suggestions page
+        path: 'suggestions',
         element: <Suggestions />
+      },
+      {
+        path: 'profile',
+        element: <Profile />
       },
     ]
   },

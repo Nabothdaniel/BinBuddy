@@ -160,10 +160,10 @@ const Header = () => {
           </li>
         </ul>
         <div className="mt-36 flex  flex-col gap-4">
-        <Link to="/login" className="bg-white/20 hover:bg-green-400 text-white text-center hover:duration-250 px-3 py-2 rounded w-full">
+        <Link to="/login" className="bg-white/20 hover:bg-emerald-700 text-white text-center hover:duration-250 px-3 py-2 rounded w-full">
             Login
           </Link>
-          <Link to="/signup" className="bg-white/20 hover:bg-green-400 text-white text-center hover:duration-250 px-3 py-2 rounded ">
+          <Link to="/signup" className="bg-white/20 hover:bg-emerald-700 text-white text-center hover:duration-250 px-3 py-2 rounded ">
             Signup
           </Link>
         </div>
