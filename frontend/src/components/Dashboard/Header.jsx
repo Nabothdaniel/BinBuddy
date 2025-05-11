@@ -1,7 +1,9 @@
-import { FaSearch, FaBell, FaEnvelope, FaChevronDown } from 'react-icons/fa';
 import { useState, useEffect, useRef } from 'react';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { FaSearch, FaBell, FaEnvelope, FaChevronDown } from 'react-icons/fa';
+
 
 export default function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -63,28 +65,26 @@ export default function Header() {
         <FaSearch className="text-gray-500 mr-2" />
         <input
           type="text"
-          placeholder="Search by name, label, task or team member..."
+          placeholder="Search by name or date of prompt..."
           className="bg-transparent outline-none w-full text-sm text-gray-700"
         />
       </div>
 
       {/* Mobile Search */}
       <div className="md:hidden">
-        <button onClick={() => navigate('/prompts')}>
+        <button onClick={() => navigate('/search')}>
           <FaSearch className="text-gray-600 text-xl" />
         </button>
       </div>
 
       {/* Right Section */}
       <div className="flex items-center space-x-4 ml-4 relative" ref={dropdownRef}>
-        <button className="relative">
-          <FaEnvelope className="text-gray-600 text-lg" />
-        </button>
+    
 
-        <button className="relative">
+        <Link to='/dashboard/notifications' className="relative">
           <FaBell className="text-gray-600 text-lg" />
           <span className="absolute -top-1 -right-1 bg-red-500 rounded-full w-2.5 h-2.5" />
-        </button>
+        </Link>
 
         {/* Profile */}
         {user && (
@@ -118,8 +118,7 @@ export default function Header() {
             dropdownOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
           }`}
         >
-          <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">Profile</button>
-          <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">Settings</button>
+          <Link to='/dashboard/profile' className="w-full block text-left px-4 py-2 text-sm hover:bg-gray-100">Profile</Link>
           <button
             onClick={handleLogout}
             className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-red-500"

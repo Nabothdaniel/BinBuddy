@@ -18,6 +18,7 @@ import Home from './components/Dashboard/Home.jsx';
 import Suggestions from './components/Dashboard/Suggestions.jsx';
 import Upload from './components/Dashboard/Upload.jsx';
 import Profile from './components/Dashboard/Profile.jsx';
+import Notifications from './components/Dashboard/Notfications.jsx';
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />
+      },
+      {
+        path: 'notifications',
+        element: <Notifications />
       },
     ]
   },
