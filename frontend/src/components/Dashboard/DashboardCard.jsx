@@ -7,7 +7,7 @@ import dashBanner from '../../assets/dashboard/dashbanner2.png';
 
 const DashboardCard = () => {
   return (
-    <div className='bg-black rounded-md py-3 px-5 h-[250px] bg-cover bg-center ' style={{ backgroundImage: `url(${dashBanner})` }}>
+    <div className='bg-black rounded-md py-3 px-5 h-auto md:h-[250px] bg-cover bg-center ' style={{ backgroundImage: `url(${dashBanner})` }}>
       <h1 className="text-4xl md:text-6xl font-extrabold text-white my-3 mt-2">
         Welcome back, Daniel 👋
       </h1>
