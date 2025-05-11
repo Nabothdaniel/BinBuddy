@@ -59,7 +59,7 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full bg-white px-4 md:px-8 py-4 flex justify-between items-center shadow-sm relative z-10 md:z-50">
+    <header className="w-full sticky top-0 right-0 left-0  bg-white px-4 md:px-8 py-4 flex justify-between items-center  z-10 md:z-50">
       {/* Search (Desktop) */}
       <div className="hidden md:flex items-center w-full max-w-md bg-gray-100 px-3 py-2 rounded-full">
         <FaSearch className="text-gray-500 mr-2" />

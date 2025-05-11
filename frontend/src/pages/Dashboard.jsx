@@ -16,9 +16,11 @@ import { FiX } from 'react-icons/fi';
 import bgBanner from '../assets/main-bg.png'
 import Footer from '../components/landingComponents/Footer';
 import Header from '../components/Dashboard/Header';
+//logo import
+import Logo from '../assets/svg/BINBUDDY.svg';
 
 const Dashboard = () => {
-  const [ setUser] = useState(null);
+  const [setUser] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -44,13 +46,15 @@ const Dashboard = () => {
     <div className="flex h-screen overflow-hidden bg-gray-50 object-cover " style={{ backgroundImage: `url(${bgBanner})` }}>
       {/* Sidebar */}
       <aside
-        className={`fixed z-40 top-0 left-0 h-full w-64 shadow-lg bg-white border-r transform transition-transform duration-200 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed z-40 top-0 left-0 h-full w-64 shadow bg-white  transform transition-transform duration-200 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
           } md:relative md:translate-x-0 md:flex md:flex-col md:w-64`}
       >
         <div className="flex flex-col justify-between h-full p-4">
           <div>
             <div className="flex justify-between items-center mb-6">
-              <Link to='/' className="text-2xl font-bold text-green-700">BinBuddy</Link>
+              <Link to='/dashboard' className="text-2xl font-bold text-green-700 ">
+                <img src={Logo} alt="binbuddy logo" className='h-[3rem] w-[6rem]' />
+              </Link>
               <button
                 className="md:hidden text-gray-500"
                 onClick={() => setSidebarOpen(false)}
@@ -63,13 +67,13 @@ const Dashboard = () => {
             <nav className="space-y-4 text-gray-700 my-10 ">
 
               <p className='text-xl font-bold my-5'>NAVIGATION</p>
-              <Link to="/dashboard" className="flex items-center gap-3 text-green-600 hover:duration-150 hover:text-white hover:bg-green-600 py-2 px-3 rounded-md">
+              <Link to="/dashboard" className="flex items-center gap-3 text-gray-600 hover:duration-150 hover:text-white hover:bg-green-600 py-2 px-3 rounded-md">
                 <HiOutlineViewGrid /> Dashboard
               </Link>
-              <Link to="/dashboard/upload" className="flex items-center gap-3 text-green-600 hover:duration-150 hover:text-white hover:bg-green-600 py-2 px-3 rounded-md">
+              <Link to="/dashboard/upload" className="flex items-center gap-3 text-gray-600 hover:duration-150 hover:text-white hover:bg-green-600 py-2 px-3 rounded-md">
                 <SlCloudUpload /> Upload
               </Link>
-              <Link to="/dashboard/profile" className="flex items-center gap-3 text-green-600 hover:duration-150 hover:text-white hover:bg-green-600 py-2 px-3 rounded-md">
+              <Link to="/dashboard/profile" className="flex items-center gap-3 text-gray-600 hover:duration-150 hover:text-white hover:bg-green-600 py-2 px-3 rounded-md">
                 <MdOutlinePerson /> Profile
               </Link>
 
@@ -94,9 +98,11 @@ const Dashboard = () => {
       {/* Main Content */}
       <div className="flex-1 overflow-auto">
         {/* Mobile Navbar */}
-        <header className="md:hidden bg-white shadow-sm px-4 py-3 flex justify-between items-center">
+        <header className="md:hidden  bg-white shadow-sm px-4 py-3 flex justify-between items-center">
 
-          <Link to='/' className="text-lg font-bold text-green-700">Binbudy</Link >
+          <Link to='/' className="text-2xl font-bold text-green-700 ">
+            <img src={Logo} alt="binbuddy logo" className='h-[3rem] w-[6rem]' />
+          </Link>
           <button
             onClick={() => setSidebarOpen(true)}
             className="text-gray-700 text-xl"

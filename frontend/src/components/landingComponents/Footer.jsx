@@ -1,6 +1,6 @@
 import React from "react";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
-import Logo from '../../assets/logo.png'
+import Logo from '../../assets/svg/BINBUDDY.svg'
 
 const Footer = () => {
   return (
@@ -10,7 +10,7 @@ const Footer = () => {
         {/* Logo & Description */}
         <div>
           <div className="flex items-center mb-2">
-            <img src={Logo} alt="binbuddy logo" className="w-26 h-16 object-cover"/>
+            <img src={Logo} alt="binbuddy logo" className="w-[5rem] h-[3rem]"/>
           </div>
           <p className="text-[15px] md:text-[17px]">
             Your smart waste sorting assistant. Make recycling easy, efficient, and fun!

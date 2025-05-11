@@ -14,7 +14,7 @@ import {
 import { FaAudible } from "react-icons/fa6";
 import { IoPersonOutline } from "react-icons/io5";
 import { LuLockKeyholeOpen } from "react-icons/lu";
-import Logo from '../../assets/logo.png';
+import Logo from '../../assets/svg/BINBUDDY.svg';
 import { Link } from 'react-router-dom';
 
 const Header = () => {

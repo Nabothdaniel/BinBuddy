@@ -139,7 +139,7 @@ const Profile = () => {
 
   return (
     <div className="max-w-4xl mx-auto justify-center">
-      <div className="bg-white rounded-3xl w-full">
+      <div className="bg-white p-3 rounded-3xl w-full">
         <div className="text-center p-4 pt-6 pb-0">
           <h2 className="text-2xl font-bold">Profile</h2>
         </div>
@@ -220,7 +220,7 @@ const Profile = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-black text-white rounded-full py-3 mt-2"
+              className="w-full bg-green-800 hover:bg-green-600 hover:duration-250 cursor-pointer text-white rounded-full py-3 mt-2"
             >
               Save Profile
             </button>

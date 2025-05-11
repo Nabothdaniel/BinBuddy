@@ -40,7 +40,7 @@ const DashboardCard = () => {
           Upload
         </Link>
         <Link
-          to="/check-recent"
+          to="/dashboard/notifications"
           className="bg-green-700 hover:bg-green-800 transition duration-150 text-white py-2 px-4 rounded-md shadow-sm"
         >
           Recent Results

@@ -42,7 +42,7 @@ const RecentSearchList = () => {
       {recentSearches.map((item, index) => (
         <div
           key={index}
-          className="w-full hover:bg-emerald-50  hover:duration-250 rounded cursor-pointer  p-4 flex justify-between items-center"
+          className="w-full hover:bg-emerald-50/45  hover:duration-250 rounded-sm cursor-pointer  p-4 flex justify-between items-center"
         >
           <div>
             <h3 className="text-lg font-semibold">{item.itemName}</h3>

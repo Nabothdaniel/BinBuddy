@@ -28,4 +28,4 @@ categories = [
 ]
 
 # Run the scraper
-scrape_multiple_categories(categories, base_folder="waste_dataset", images_per_class=50)
+scrape_multiple_categories(categories, base_folder="waste_dataset", images_per_class=100)
