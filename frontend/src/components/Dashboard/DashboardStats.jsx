@@ -22,7 +22,7 @@ const StatCard = ({ icon, label, value }) => (
 
 const DashboardStats = () => {
   return (
-    <div className="w-full px-4 py-6 bg-gray-50">
+    <div className="w-full px-4 py-6">
       <div className="flex flex-wrap gap-2 justify-between">
         {stats.map((stat, idx) => (
           <StatCard key={idx} {...stat} />
