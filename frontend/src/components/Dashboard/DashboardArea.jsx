@@ -1,8 +1,12 @@
+import Analytics from './Analytics';
+import DashboardCard from './DashboardCard';
 import DashboardStats from './DashboardStats';
 const DashboardArea = () => {
   return (
     <div>
-      <DashboardStats/>
+      <DashboardCard />
+      <DashboardStats />
+      <Analytics />
     </div>
   )
 }

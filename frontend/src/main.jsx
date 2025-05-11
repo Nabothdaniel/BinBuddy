@@ -40,10 +40,7 @@ const router = createBrowserRouter([
         index: true, // default route for /dashboard
         element: <Home />
       },
-      {
-        path: 'home',
-        element: <Home />
-      },
+  
       {
         path: 'upload',
         element: <Upload />

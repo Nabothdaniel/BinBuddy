@@ -1,11 +1,11 @@
-import Analytics from "./Analytics"
+import DashboardArea from "./DashboardArea"
 
 const Home = () => {
     return (
 
-           <div>
-            <Analytics/>
-           </div>
+        <div>
+            <DashboardArea />
+        </div>
     )
 }
 

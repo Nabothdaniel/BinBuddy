@@ -16,11 +16,9 @@ import { FiX } from 'react-icons/fi';
 import bgBanner from '../assets/main-bg.png'
 import Footer from '../components/landingComponents/Footer';
 import Header from '../components/Dashboard/Header';
-import DashboardCard from '../components/Dashboard/DashboardCard';
-import DashboardArea from '../components/Dashboard/DashboardArea';
 
 const Dashboard = () => {
-  const [user, setUser] = useState(null);
+  const [ setUser] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -65,7 +63,7 @@ const Dashboard = () => {
             <nav className="space-y-4 text-gray-700 my-10 ">
 
               <p className='text-xl font-bold my-5'>NAVIGATION</p>
-              <Link to="/dashboard/home" className="flex items-center gap-3 text-green-600 hover:duration-150 hover:text-white hover:bg-green-600 py-2 px-3 rounded-md">
+              <Link to="/dashboard" className="flex items-center gap-3 text-green-600 hover:duration-150 hover:text-white hover:bg-green-600 py-2 px-3 rounded-md">
                 <HiOutlineViewGrid /> Dashboard
               </Link>
               <Link to="/dashboard/upload" className="flex items-center gap-3 text-green-600 hover:duration-150 hover:text-white hover:bg-green-600 py-2 px-3 rounded-md">
@@ -113,8 +111,6 @@ const Dashboard = () => {
         {/* Body */}
         <main className="p-4 md:p-6 space-y-6">
           {/* Quick Actions */}
-          <DashboardCard />
-          <DashboardArea />
           <Outlet />
         </main>
         <Footer />
