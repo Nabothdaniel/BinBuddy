@@ -4,7 +4,7 @@ import { auth } from '../firbase/firebase';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
-   FaBars,
+  FaBars,
 } from 'react-icons/fa';
 import { MdOutlinePerson } from "react-icons/md";
 import { HiOutlineViewGrid } from 'react-icons/hi';
@@ -17,9 +17,10 @@ import bgBanner from '../assets/main-bg.png'
 import Footer from '../components/landingComponents/Footer';
 import Header from '../components/Dashboard/Header';
 import DashboardCard from '../components/Dashboard/DashboardCard';
+import DashboardArea from '../components/Dashboard/DashboardArea';
 
 const Dashboard = () => {
-  const [user,setUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -96,7 +97,7 @@ const Dashboard = () => {
       <div className="flex-1 overflow-auto">
         {/* Mobile Navbar */}
         <header className="md:hidden bg-white shadow-sm px-4 py-3 flex justify-between items-center">
-        
+
           <Link to='/' className="text-lg font-bold text-green-700">Binbudy</Link >
           <button
             onClick={() => setSidebarOpen(true)}
@@ -113,6 +114,7 @@ const Dashboard = () => {
         <main className="p-4 md:p-6 space-y-6">
           {/* Quick Actions */}
           <DashboardCard />
+          <DashboardArea />
           <Outlet />
         </main>
         <Footer />

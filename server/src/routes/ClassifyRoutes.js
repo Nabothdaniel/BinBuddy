@@ -7,6 +7,6 @@ const router = express.Router();
 
 
 
-router.post("/verify-waste",upload.single('image'),Classify);
+router.post("/classify-waste",upload.single('image'),Classify);
 
 export default router;

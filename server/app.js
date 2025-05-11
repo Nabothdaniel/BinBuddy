@@ -18,19 +18,25 @@ const app = express();
 
 
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true, // Optional, only if you're using cookies/auth
+}));
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
+
+
+
 
 //connects to a mongodb database
 connectDB()
 
 
 
-app.use('/api/v1/',ClassifyRoutes );
+app.use('/api/v1/', ClassifyRoutes);
 
-app.get('/',(req,res)=>{
-    res.status(200).json({msg:`server is well and runing on ${port}`})
+app.get('/', (req, res) => {
+    res.status(200).json({ msg: `server is well and runing on ${port}` })
 })
 
 app.listen(port, () => console.log('Server running on port 5000'));

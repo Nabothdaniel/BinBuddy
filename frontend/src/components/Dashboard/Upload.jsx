@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { FaPlus, FaTrash } from 'react-icons/fa6';
+import { FaRegSquarePlus } from "react-icons/fa6";
+import { BiTrashAlt } from "react-icons/bi";
+import { LuBrainCircuit } from "react-icons/lu";
 
 const Upload = () => {
   const [file, setFile] = useState(null);
@@ -15,7 +17,7 @@ const Upload = () => {
     if (!file) {
       setChat((prev) => [
         ...prev,
-        { role: 'bot', message: '⚠️ Please select an image before submitting.' },
+        { role: 'bot', message: ' Please select an image before submitting.' },
       ]);
       return;
     }
@@ -39,13 +41,13 @@ const Upload = () => {
 
       setChat((prev) => [
         ...prev,
-        { role: 'bot', message: `🧠 BinBuddy says: This item is classified as: ${label}` },
+        { role: 'bot', message: ` BinBuddy says: This item is classified as: ${label}` },
       ]);
     } catch (err) {
       console.error(err);
       setChat((prev) => [
         ...prev,
-        { role: 'bot', message: '❌ Error: Unable to classify image. Please try again.' },
+        { role: 'bot', message: ' Error: Unable to classify image. Please try again.' },
       ]);
     } finally {
       setLoading(false);
@@ -55,7 +57,7 @@ const Upload = () => {
   return (
     <section className="bg-white p-6 rounded-xl shadow-md my-10">
       <div className="flex items-center mb-4">
-        <FaTrash className="text-green-700 mr-2 text-2xl" />
+        <BiTrashAlt className="text-green-700 mr-2 text-2xl" />
         <h2 className="text-xl font-semibold text-green-700">Classify Waste</h2>
       </div>
 
@@ -66,9 +68,9 @@ const Upload = () => {
       <form onSubmit={handleSubmit} className="space-y-4">
         <label
           htmlFor="file-upload"
-          className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-green-600 rounded-lg cursor-pointer hover:bg-green-50 transition"
+          className="flex flex-col items-center justify-center w-full h-[20rem] border-2 border-dashed border-gray-600 rounded-lg cursor-pointer hover:bg-green-50 transition"
         >
-          <FaPlus className="text-4xl text-green-600 mb-2" />
+          <FaRegSquarePlus className="text-4xl text-green-600 mb-2" />
           <p className="text-sm text-green-600">
             {file ? file.name : 'Click to upload image'}
           </p>
