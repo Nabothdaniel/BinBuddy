@@ -19,6 +19,7 @@ import Suggestions from './components/Dashboard/Suggestions.jsx';
 import Upload from './components/Dashboard/Upload.jsx';
 import Profile from './components/Dashboard/Profile.jsx';
 import Notifications from './components/Dashboard/Notfications.jsx';
+import Privacy from './components/Dashboard/privacy.jsx';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: 'notifications',
         element: <Notifications />
+      },
+      {
+        path: 'privacy',
+        element: <Privacy />
       },
     ]
   },
