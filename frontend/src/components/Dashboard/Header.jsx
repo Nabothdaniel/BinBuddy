@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { FaSearch, FaBell, FaEnvelope, FaChevronDown } from 'react-icons/fa';
+import { FaSearch, FaBell, FaChevronDown } from 'react-icons/fa';
 
 
 export default function Header() {

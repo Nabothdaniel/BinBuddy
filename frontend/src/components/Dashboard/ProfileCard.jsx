@@ -1,6 +1,5 @@
-import React from 'react'
 import { FaPen } from "react-icons/fa";
-import user from '../../../public/user.png'
+import user from '../../assets/user/user.png'
 
 const ProfileCard = () => {
   return (
