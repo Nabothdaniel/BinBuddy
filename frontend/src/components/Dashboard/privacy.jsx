@@ -1,7 +1,7 @@
 
 import { FaShieldAlt } from 'react-icons/fa';
 
-const privacy = () => {
+const Privacy = () => {
   return (
     <>
       <section>
@@ -71,11 +71,11 @@ const privacy = () => {
           <div className='bg-[#f0fdf9] w-[100%]  mt-4.5 p-6 rounded-xl'>
             <h3 className='font-semibold text-black inline-block'>Email:</h3>
             <p className='inline-block'>binbuddy@gmail.com</p>
-          </div>
+
         </div>
       </section>
     </>
   )
 }
 
-export default privacy
+export default Privacy

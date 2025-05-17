@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock } from 'lucide-react';
+// import { Clock } from 'lucide-react';
 
 const recentSearches = [
   {
@@ -47,7 +47,7 @@ const RecentSearchList = () => {
           <div>
             <h3 className="text-lg font-semibold">{item.itemName}</h3>
             <div className="text-sm text-gray-500 flex items-center gap-1 mt-1">
-              <Clock className="w-4 h-4" />
+              {/* <Clock className="w-4 h-4" /> */}
               <span>{item.timestamp}</span>
             </div>
           </div>
