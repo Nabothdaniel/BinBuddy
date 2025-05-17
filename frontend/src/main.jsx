@@ -17,8 +17,9 @@ import Dashboard from './pages/Dashboard.jsx';
 import Home from './components/Dashboard/Home.jsx';
 import Suggestions from './components/Dashboard/Suggestions.jsx';
 import Upload from './components/Dashboard/Upload.jsx';
-import Profile from './components/Dashboard/Profile.jsx';
+//import Profile from './components/Dashboard/Profile.jsx';
 import Notifications from './components/Dashboard/Notfications.jsx';
+import ProfileCard from './components/Dashboard/ProfileCard.jsx';
 import Privacy from './components/Dashboard/privacy.jsx';
 
 const router = createBrowserRouter([
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <Profile />
+        element: <ProfileCard />
       },
       {
         path: 'notifications',

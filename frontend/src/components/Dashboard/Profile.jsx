@@ -3,6 +3,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { doc, getDoc, getFirestore, updateDoc } from 'firebase/firestore';
 import { IoCamera } from 'react-icons/io5';
+import ProfileCard from './ProfileCard';
 
 const gradientOptions = [
   "bg-gradient-to-r from-green-400 via-blue-500 to-green-600",
@@ -139,6 +140,8 @@ const Profile = () => {
 
   return (
     <div className="max-w-4xl mx-auto justify-center">
+
+      {/* <ProfileCard /> */}
       <div className="bg-white p-3 rounded-3xl w-full">
         <div className="text-center p-4 pt-6 pb-0">
           <h2 className="text-2xl font-bold">Profile</h2>
