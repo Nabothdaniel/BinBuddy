@@ -5,7 +5,7 @@ dotenv.config();
 
 //db connection function
 
-import { connectDB } from './src/utils/db.js';
+//import { connectDB } from './src/utils/db.js';
 
 
 //routes import
@@ -20,7 +20,7 @@ const app = express();
 
 app.use(cors({
     origin: 'http://localhost:5173',
-    credentials: true, // Optional, only if you're using cookies/auth
+    credentials: true, 
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 //connects to a mongodb database
-connectDB()
+//connectDB()
 
 
 
