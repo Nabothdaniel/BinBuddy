@@ -20,16 +20,10 @@ import Header from '../components/Dashboard/Header';
 import Logo from '../assets/svg/BINBUDDY.svg';
 
 const Dashboard = () => {
-  const [setUser] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
+  
 
   const handleLogout = async () => {
     try {
