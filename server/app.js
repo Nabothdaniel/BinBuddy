@@ -19,7 +19,7 @@ const app = express();
 
 
 app.use(cors({
-    origin: ['http://localhost:5173','https://bin-buddy-drab.vercel.app']
+    origin: ['http://localhost:5173','https://bin-buddy-drab.vercel.app'],
     credentials: true, 
 }));
 app.use(express.json());
