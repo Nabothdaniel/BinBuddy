@@ -114,7 +114,7 @@ export default function Header() {
 
         {/* Dropdown */}
         <div
-          className={`absolute top-16 right-0 bg-white border shadow-lg rounded-md py-2 w-40 transition-all duration-300 z-[1000] ${
+          className={`absolute top-16 right-0 bg-white shadow-md outline-0 rounded-md py-2 w-40 transition-all duration-300 z-[1000] ${
             dropdownOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
           }`}
         >
