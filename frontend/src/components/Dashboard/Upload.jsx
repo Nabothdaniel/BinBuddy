@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { FaRegSquarePlus } from "react-icons/fa6";
 import { BiTrashAlt } from "react-icons/bi";
-import { LuBrainCircuit } from "react-icons/lu";
 
 const Upload = () => {
   const [file, setFile] = useState(null);
