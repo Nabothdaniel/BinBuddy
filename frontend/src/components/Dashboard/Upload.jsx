@@ -37,7 +37,7 @@ export default function Upload() {
     formData.append("image", file)
 
     try {
-      const res = await fetch("https://binbuddy-1c62.onrender.com/api/v1/classify-waste", {
+      const res = await fetch("http://localhost:5000/api/v1/classify-waste", {
         method: "POST",
         body: formData,
       })

@@ -1,55 +1,72 @@
-import axios from 'axios';
-import fs from 'fs';
+import axios from "axios";
 
+/**
+ * Classify uploaded image using Roboflow API (Render-safe)
+ */
 const Classify = async (req, res) => {
   try {
+    // ✅ 1. Ensure an image file exists
     if (!req.file) {
       return res.status(400).json({ error: "No image file uploaded" });
     }
 
-    const imagePath = req.file.path;
-    const image = fs.readFileSync(imagePath, { encoding: "base64" });
+    // ✅ 2. Convert uploaded buffer to base64
+    const base64Image = req.file.buffer.toString("base64");
 
-    // Log image properties for debugging
-    const imageStats = fs.statSync(imagePath);
-    console.log('Image uploaded:', {
-      path: imagePath,
-      size: imageStats.size,
-      encoding: "base64"
+    console.log("📸 Image uploaded:", {
+      filename: req.file.originalname,
+      size: req.file.size,
+      encoding: "base64",
     });
 
+    // ✅ 3. Send base64 image to Roboflow model
     const response = await axios({
       method: "POST",
       url: "https://serverless.roboflow.com/ai-waste-povs/3",
       params: {
         api_key: process.env.RF_API_KEY,
       },
-      data: image,
+      data: base64Image,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
+      timeout: 15000, // 15s timeout to avoid long waits
     });
 
-    // Log API response for further inspection
-    console.log('API Response:', response.data);
+    console.log("🤖 Roboflow Response:", response.data);
 
-    // Optionally delete the file after classification
-    fs.unlinkSync(imagePath);
+    // ✅ 4. Extract classification result
+    const predictions = response.data?.predictions || [];
+    if (predictions.length > 0) {
+      const bestPrediction = predictions[0];
+      const classification = bestPrediction?.class || "🗑️ Unknown";
+      const confidence = (bestPrediction?.confidence * 100).toFixed(2);
 
-    // Check if predictions exist and handle accordingly
-    if (response.data.predictions && response.data.predictions.length > 0) {
-      const classification = response.data.predictions[0]?.class || '🗑️ Unknown';
-      res.status(200).json({ classification });
-      console.log('Classification result:', classification);
-    } else {
-      // If no predictions, return a message indicating the model couldn't classify the image
-      res.status(500).json({ error: "No classification result. The model couldn't classify this image." });
-      console.log('No classification result. Model returned empty predictions.');
+      console.log("✅ Classification result:", classification, `(${confidence}%)`);
+      return res.status(200).json({
+        classification,
+        confidence: `${confidence}%`,
+      });
     }
 
+    // ✅ 5. Handle case: no predictions found
+    console.log("⚠️ No classification result. Empty predictions array.");
+    return res.status(200).json({
+      message:
+        "No classification result. The model couldn't recognize any known waste items.",
+    });
   } catch (error) {
-    console.error('Error classifying image:', error.message);
-    res.status(500).json({ error: "Failed to classify image" });
+    console.error("❌ Error classifying image:", error.message);
+
+    // ✅ 6. Handle possible axios/network issues clearly
+    if (error.response) {
+      console.error("Roboflow API Error:", error.response.data);
+    }
+
+    return res.status(500).json({
+      error: "Failed to classify image",
+      details: error.response?.data || error.message,
+    });
   }
 };
 
